@@ -119,11 +119,67 @@ X_train, X_test, y_train, t_test = train_test_split(피터 데이터 세트, lab
 
 
 
- ### - 교차 검증 
+ ### -  Cross Validation (교차 검증)
 
-> - K 폴드 교차 검증
+> - KFold 교차 검증
 >
-> - Stratified K 폴드
+> - Stratified KFold
+
+- Overfitting(과적합): 모델의 과도한 학습 데이터에 최적화 -> 실제 테스트 데이터의 예측 성능 저하
+
+- 교차검증 -> 데이터 편중 막기 위해 별도의 여러 세트로 구성된 학습+검증 데이터 세트에서 학습, 평가 수행
+
+- ML 모델 성능 평가 
+  - 1차: 교차 검증 기반 평가
+  - 최종: test datase 적용 -> 평가 
+
+| Train dataset ( train + Validation ) | Test dataset |
+| :----------------------------------: | :----------: |
+
+
+
+#### KFold
+
+가장 보편적인 교차 검증 기법 
+
+K개 데이터 폴드 세트 생성 -> 폴드 세트의 학습+검증 평가 K번 반복 수행 
+
+```py
+from sklearn.datasets import load_iris
+from sklearn import DecisionTreeClassifier # 분류 (DecisionTree)
+from sklearn.model_selection import Kfold  # 교차검증 (Kfold) 
+from sklearn.metrics import accuracy_score # 정확도
+import numpy as np
+
+# 1) 데이터 불러오기 및 분류
+iris = load_iris()
+feature = iris.data
+label = iris.target
+dt_clf = DecisionTreeClassifier(random_state=156)
+
+# 2) KFold 객체, 정확도 담을 리스트 생성 
+kfold = Kfold(n_split = 5) # 5개의 폴더로 나눔 
+cv_accuracy = []
+# 여기서 붓꽃 데이터 세트 크기 ->  feature.shape[0] = 150
+# 학습:120(4/5) , 검증: 30(1/5)
+n_iter = 0
+for train_index, test_index in kfold.split(features): # kfold.split()->학습,검증 인덱스 array
+  X_train, X_test = features[train_index], features[test_index]
+  y_train, y_test = label[train_index], label[test_index]
+  
+  dt_clf.fit(X_train, y_train)  # 학습 
+  pred = dt_clf.predict(X_test) # 예측
+  
+  accuracy = np.round(accuracy_score(y_test, pred), 4) # 정확도 / np.round():반올림 
+  #train_size = X_train.shape[0] # 학습 데이터 크기
+  #test_size = X_test.shape[0]   # 테스트 데이터 크기
+  cv_accuracy.append(accuracy)
+  
+# 개별 iteration 별 정확도 합 -> 평균 정확도 계산
+print('\n##평균 검증 정확도:', np.mean(cv_accuracy))
+```
+
+
 
 
 
