@@ -104,7 +104,7 @@
 
 
 
-### - train_test_split()
+### - `train_test_split()`
 
 > train/test dataset 분리
 
@@ -224,7 +224,7 @@ for train_index, test_index in skf.split(iris_df, iris_df['label']):
 dt_clf = DecisionTreeClassifier(random_state=156)
 
 # 2) KFold 객체, 정확도 담을 리스트 생성 
-skf = StratifiedKfold(n_split = 3) # laebel 고유값 3개라서
+skf = StratifiedKfold(n_split = 3) # 폴드 세트 3개
 cv_accuracy = []
 n_iter = 0
 for train_index, test_index in skfold.split(features, label): # kfold.split()->학습,검증 인덱스 array
@@ -305,16 +305,64 @@ Ex) cv=3, parameter=3 => 3*3=9회의 fit/predict
 1. `train_test_split()` -> train/test dataset 분리 
 2. Train data -> GridSearchCV 최적 하이퍼 파라미터 찾기
 
+- 하이퍼 파라미터 세트 : {} - dictionary
+- 하이퍼 파라미터 명칭: "key 값" - string
+- 하이퍼 파라미터 값: [] - list
+
 ```py
 from sklearn.datasets import load_iris
 from sklearn import DecisionTreeClassifier # 분류 (DecisionTree)
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import train_test_split, GridSearchCV
 
-# 1) 데이터 불러오기 및 분류
+### 1) 
+# 데이터 로딩 
 iris = load_iris()
-data = iris.data
-label = iris.target
-dt_clf = DecisionTreeClassifier(random_state=156)
+# train/test dataset
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state= 212)
+# 분류
+dtree = DecisionTreeClassifier(random_state=156)
+
+### 2) 
+# 파라미터 -> 딕셔너리 형태 저장
+# DecisionTreeClassifier의 중요 파라미터: 'max_depth', 'min_sample_split'
+parameters = {'max_depth':[1,2,3],
+             'min_sample_split':[2,3]}
+
+# 'param_grid'의 하이퍼 파라미터 -> 3개의 train/test dataset fold로 나누어 테스트 수행 결정 
+# refit=True : 가장 좋은 파라미터 설정으로 재학습 
+grid_tree = GridSearchCV(dtree, param_grid = parameters, cv = 3, refit = True )
+
+#'param_grid'의 하이퍼 파라미터 -> 순차적 train/predict
+grid_tree.fit(X_train, y_train)
+
+### 3)
+# GridSearchCV 결과 추출 -> DataFrame으로 변환 
+score_df = pd.DataFrame(grid_tree.cv_results_)
+scores_df[['params', 'mean_test_score', 'rank_test_score', 
+          'split0_test_score', 'split1_test_score', 'split2_test_score' ]] # cv=3 -> 3개
+
+print('GridSearchCV 최적 파라미터:', grid_tree.best_params_)
+print('GridSearchCV 최고 정확도:', grid_tree.best_score_)
+
+# .cv_results_ : 교차검증 결과
+# .best_params_ : 최적의 파라미터 (rank_test_score=1의 값일 경우)
+# .best_score_ : 최고 정확도  (rank_test_score=1의 값일 경우)
+```
+
+
+
+```py
+# refit=True -> default
+# GridSearchCV 최적 성능 나타내는 하이퍼 파라미터로 Estiamtor 학습 => 'best_estimator_'로 저장
+
+# GridSearchCV의 refit으로 이미 학습된 estimator 반환 
+estimator = grid_tree.best_estimator_
+
+pred = esimator.predict(X_test) # estimator이미 학습 끝난 상태
+print('테스트 데이터 세트 정확도: {0:.4f}'.format(accuracy_score(y_test, pred)) 
+      
+#====> 일반적인 머신러닝 모델 적용 방법 
+# train data -> GridSearchCV 통한 최적 하이퍼 파라미터 튜닝 수행 -> 별도 test set에서 평가 
 ```
 
 
