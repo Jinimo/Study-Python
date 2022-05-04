@@ -18,7 +18,9 @@
 
 
 
-## **Supervised Learning (지도학습)**
+## 1. Supervised Learning, Un - supervised Learning
+
+### -  **Supervised Learning (지도학습)**
 
 
 - 학습을 위한 다양한 `feature`와 분류 결정값인 `Label`(레이블) 데이터로 모델 학습 -> 별도의 `test datadset` 에서 미지의 레이블 값 예측
@@ -28,7 +30,7 @@
 
 
 
-### - **Estimator**
+#### - **Estimator**
 
 > 지도학습의 모든 알고리즘 구현 클래스 통칭 (학습: `.fit()`, 예측: `predict()`)
 
@@ -48,7 +50,7 @@
 
 
 
-## Un - supervised Learning (비지도학습)
+### - Un - supervised Learning (비지도학습)
 
 `fit()`, `transform()` 적용
 
@@ -66,18 +68,13 @@
 
 
 
-##  module
+## 2. module
 
 - `sklearn.dataset` 내 모듈: 사이킷런에서 자체적으로 제공하는 데이터 세트 생성 모듈
 
 - `sklearn.tree` 내 모듈: 트리기반 ML 알고리즘 구현 class 모임  
 
 - `sklearn.model_selection` 내 모듈: train/test dataset 데이터 분리, 최적의 파라미터로 평가하기 위한 다양한 모듈 모임
-
-
-
-
-
 
 
 
@@ -100,7 +97,7 @@
 
 
 
-## Model Selection module 소개
+## 3. Model Selection module 소개
 
 
 
@@ -305,9 +302,9 @@ Ex) cv=3, parameter=3 => 3*3=9회의 fit/predict
 1. `train_test_split()` -> train/test dataset 분리 
 2. Train data -> GridSearchCV 최적 하이퍼 파라미터 찾기
 
-- 하이퍼 파라미터 세트 : {} - dictionary
+- 하이퍼 파라미터 세트 : `{ }` - dictionary
 - 하이퍼 파라미터 명칭: "key 값" - string
-- 하이퍼 파라미터 값: [] - list
+- 하이퍼 파라미터 값: `[ ]` - list
 
 ```py
 from sklearn.datasets import load_iris
@@ -367,3 +364,99 @@ print('테스트 데이터 세트 정확도: {0:.4f}'.format(accuracy_score(y_te
 
 
 
+## 4. Data Preprocessing (데이터 전처리)- 
+
+- `NaN`, `Null` 값 (결손값) 허용 X => 고정된 다른값으로 변환해야 함 
+
+  	- 결손값 많이 없는 경우 => feature `mean`(평균값)  대체 가능
+
+  	- 결손값 일정수준 이상의 경우 => `drop` 
+  	- 정해진 기준 X 
+  	- feature중요도 높음, 단순히 `Null` 값 ->`mean`(평균값)으로 대체할 경우 => 왜곡 심할 수 있다면 업무 로직 등 상세한 검토를 통해 더 정밀한 대체값 선정해야 함
+
+- scikitlearn 머신러닝 알고리즘: 문자열값 -> 입력값 허용 X => 인코딩하여 숫자 형으로 변환 
+  -  문자열 feature: 카테고리형, 텍스트형
+  - 텍스트형 -> feature vectorization(피처 백터화) or 불필요한 데이터면 삭제
+
+
+
+### 1) Data encoding
+
+>- Label encoding
+>- One-Hot encoding
+
+
+
+####  - Label encoding 
+
+- scikitlearn Label encoding => `LabelEncoder` class로 구현 
+- `LabelEncoder` 객체 생성 -> `fit()` + `transform()`
+
+
+
+- 문자열 값  => 숫자형 카테고리 값 변환 
+- 일괄적인 숫자 값 변환 -> 몇몇 ML 알고리즘에서 예측 성능 저하 (숫자 가중치 부여하는 몇몇 ML 알고리즘 )
+- 숫자값 -> 단순코드 ! (숫자에 따른 순서, 중요도로 인식 X)
+- 따라서, Label encoding -> '선형 회귀' 같은  ML 알고리즘에 적용 X / 'Tree'  계열은 상관 X
+
+``` py
+from sklearn.preprocessing import LabelEncoder
+
+items = ['TV', '냉장고', '선풍기']
+
+encoder = LabelEncoder()
+encoder.fit(items) # 학습 
+
+labels = encoder.transform(items) # 데이터 인코딩 변환값
+
+###
+encoder.classes_  # 인코딩 클래스 값 확인 (원본 데이터)
+
+encoder/inverse_transform([]) # 디코딩 
+```
+
+
+
+#### - One-Hot encoding
+
+- Label encoding 문제점 보완 
+- feature 값 유형에 따라 새로운 feature 추가 => 고유값 column에만 ` 1` 표시, 나머지 `0`
+- 입력값: 2차원 데이터 필요 
+- 변환값: Spare Matrix (희소 행렬) -> `toarry()` -> Dense Matrix (밀집 행렬)
+
+```py
+from sklearn.preprocessing import OneHotEncoder
+import numpy as np
+
+items = ['TV', '냉장고', '선풍기']
+items = np.array(items).reshape(-1,1) # 2차원 ndarray로 변환 / (n행,1열) shape 변환 
+
+# One-Hot encoding 적용 
+oh_encoder = OneHotEncoder()
+oh_encoder.fit(items)
+oh_labels = oh_encoder.transform(items) # 희소행렬 상태 
+
+# toarray() -> 밀집행렬
+oh_labels.toarray()
+oh_labels.shape      # 데이터형 확인 
+```
+
+##### - pandas: `get_dummies()`
+
+- pandas의 One-Hot encoding 지원 API 
+- 문자열 카테고리값 (-> 숫자형 변환 필요 X) => 바로 변환 !
+
+```py
+import pasdas as pd 
+df = DataFrame({'item':['TV', '냉장고', '전자레인지']})
+pd.get_dummies(df)
+```
+
+
+
+
+
+### 2) Feature Scaling 
+
+>- Standardization (표준화)
+>- Normalization (정규화)
