@@ -32,7 +32,7 @@ pd1 = pd.read_excel('파일 경로',      # ./ : 상대경로
 
 ### 데이터 확인 
 ```py
-### 데이터 확인 ###
+##### 데이터 확인 #####
 
 display()                # pandas에서만 가능
 display(df_read.head(3)) # 상위 3개
@@ -41,9 +41,13 @@ display(df_read.tail(3)) # 하위 3개
 # 행/열 갯수 확인 
 df_read.shape            
 
-# 고윳값 
-df_b.운동량.unique() 
-df_b['운동량'].unique()
+## 고윳값 
+# column 고유값
+df_b['필드명'].unique() # df_b.필드명.unique() 
+# 고유값 개수 (column별)
+df.nunique()
+df.nunique(dropna = False) # 결측값 포함 
+df['필드명'].nunique()
 
 # 데이터 타입 확인
 df_l.dtype         # (단수)  
@@ -52,8 +56,14 @@ df_l.dtypes        # (복수)
 # 숫자형 데이터 기초통계 개요(대표값)
 df_m.describe()    
 
-# 데이터 고유값 갯수 확인 
-df.필드명.value_counts()
+# 데이터 값 개수 
+df['필드명'].value_counts() # df.필드명.value_counts() 
+df['col'].value_counts(ascending=True) # 오름차순 
+
+
+
+
+
 # 넘파이 배열 데이터
 np.unique(y, return_counts=True)
 ```
@@ -134,9 +144,15 @@ df['날짜'] = pd.to_datetime(df['날짜']) # to_datetime
 # del 명령 -> 즉시 삭제 (즉시적용, 복구 X)
 del df_l['설치형태(LCD)']
 
-# drop 함수
-df_l.drop('설치형태(QR)', axis=1, inplace=True)   # 하나의 특정 열 삭제
-df_l.drop(['설치형태(QR)','설치형태(LCD)'], axis=1) # 다수의 특정 열 삭제
+## drop 함수
+# axis = 1: 열 
+# inplace = True/Flase (덮어쓰기 여부)
+# 열 삭제
+df.drop('설치형태(QR)', axis=1, inplace=True)   # 하나의 특정 열 삭제
+df.drop(['설치형태(QR)','설치형태(LCD)'], axis=1) # 다수의 특정 열 삭제
+# 행 삭제
+조건문 = df[df['칼럼명'].str.contains('포함된문자')].index # 특정 칼럼에서 특정문자를 포함한 데이터의 인덱스
+df.drop(조건문, inplace=True)
 #  inplace=True : 즉시 적용 
 
 
@@ -391,7 +407,7 @@ df_m.groupby('대여일자')['이용건수'].sum()
 chrt_df = df_m.groupby('요일')[['이용건수','대여시간']].sum()
 ```
 
-
+https://ponyozzang.tistory.com/291 
 
 ### 조건
 
