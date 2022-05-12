@@ -76,19 +76,39 @@ np.unique(y, return_counts=True)
 ## 1. 컬럼(Column) 기준
 
 # 컬럼(Column) 데이터 선택
- `pd1[ '컬럼명' ]` # 1개 선택 
-`pd1[ [ '컬럼명1', '컬럼명2'  ] ]` # 여러개 선택
+pd1[ '컬럼명' ] # 1개 선택 
+pd1[ [ '컬럼명1', '컬럼명2'  ] ] # 여러개 선택
 
 # 컬럼(Column) 생성
-`pd1['생성 컬럼명'] = 값` 
+pd1['생성 컬럼명'] = 값`
 
 ## 1. 로우(row) 기준
 # 특정 조건에 맞는 데이터 필터링(filtering)한 결과를 찾고자 하는 경우 선택 기준
 row1 = pd1['로우1'] == '값1'  # True/False 출력 
 pd1[row1]									  # True 해당값 출력
+
 ````
 
+
+
+### 데이터 조회
+
+```py
+## .loc[]
+df_1.loc['인덱스명'] # 원하는 인덱스(행)의 데이터들 -> 1차원 시리즈 구조
+df_1.loc[['인덱스명']] # 원하는 인덱스(행)의 데이터들 -> 2차원 시리즈 구조
+df_1.loc[['인덱스명1','인덱스명2']] # 다수의 인덱스(행)의 데이터들 
+df_1.loc[df_1.index != '인덱스명'] # 특정 인덱스(행) 제외
+
+## .iloc[]
+```
+
+
+
+
+
 ### 데이터 필터링
+
 ```py
 ### 필터링(filtering) ### 
 
@@ -100,6 +120,8 @@ row1 = (pd1['로우1'] == '값1')\
 
 # 1개 컬럼에 대해 - 여러 조건 1
 row1 = (pd1['로우1'] == '값1')  (pd1['로우2'] >= '값2')
+
+df_1[df_1['컬럼명'].str.contains('문자')].index # 특정 컬럼에 '문자'가 포함된 행 
 ```
 
 
@@ -142,14 +164,16 @@ df['날짜'] = pd.to_datetime(df['날짜']) # to_datetime
 ### 데이터 삭제
 
 # del 명령 -> 즉시 삭제 (즉시적용, 복구 X)
-del df_l['설치형태(LCD)']
+del df_l['컬럼명']
 
 ## drop 함수
 # axis = 1: 열 
 # inplace = True/Flase (덮어쓰기 여부)
+
 # 열 삭제
-df.drop('설치형태(QR)', axis=1, inplace=True)   # 하나의 특정 열 삭제
-df.drop(['설치형태(QR)','설치형태(LCD)'], axis=1) # 다수의 특정 열 삭제
+df.drop('컬럼명', axis=1, inplace=True)   # 하나의 특정 열 삭제 / axis=1
+df.drop(['컬럼명1','컬럼명2'], axis=1) # 다수의 특정 열 삭제
+
 # 행 삭제
 조건문 = df[df['칼럼명'].str.contains('포함된문자')].index # 특정 칼럼에서 특정문자를 포함한 데이터의 인덱스
 df.drop(조건문, inplace=True)
@@ -405,6 +429,8 @@ display(df_m.sort_values('탄소량', ascending=False).head())
 df_m['이용건수'].groupby(df_m['대여일자'])['이용건수'].sum()
 df_m.groupby('대여일자')['이용건수'].sum()
 chrt_df = df_m.groupby('요일')[['이용건수','대여시간']].sum()
+
+df.groupby(['컬럼명1','컬럼명2']).agg({'컬렴명':'mean', '컬ㅓㅁ명'})
 ```
 
 https://ponyozzang.tistory.com/291 
@@ -434,6 +460,8 @@ colList = df_m[['운동량','탄소량','사용시간', '이동거리']]
 for col in colList:
     print(f'{col}:{df_m[col].min()} / {df_m[col].max()} / {df_m[col].mean()} / {df_m[col].std()}')
 
+    
+    
 ```
 
 
