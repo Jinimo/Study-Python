@@ -8,30 +8,29 @@ Today I Learned
 
 ##  📓 Python 
 
+## 📓 Numpy
 
-
-
-
-## 📓 Data Analysis
-
+## 📓 Library
 ​	〰️ Pandas
-
 ​	〰️ Matplotlib
-
 ​	〰️ 
-
-
 
 ## 📓 Machine Learning	
 
-​	〰️ Machine Learning
-
-​	〰️
+## 📓 Deep Learning
 
 
+## 📓 Algorithm
+    〰️ 자료구조
+    〰️ 알고리즘
+
+## 📓 React 
+
+## 📓 HTML 
+## 📓 etc.
+    〰️  Markdown
 
 
 
-## 📓 Numpy
 
  
