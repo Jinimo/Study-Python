@@ -11,8 +11,8 @@ Today I Learned
 ## 📓 Numpy
 
 ## 📓 Library
-​	〰️ Pandas
-​	〰️ Matplotlib
+​	〰️ Pandas   
+​	〰️ Matplotlib   
 ​	〰️ 
 
 ## 📓 Machine Learning	
@@ -21,14 +21,14 @@ Today I Learned
 
 
 ## 📓 Algorithm
-    〰️ 자료구조
-    〰️ 알고리즘
+〰️ 자료구조    
+〰️ 알고리즘
 
 ## 📓 React 
 
 ## 📓 HTML 
 ## 📓 etc.
-    〰️  Markdown
+ 〰️   Markdown
 
 
 
