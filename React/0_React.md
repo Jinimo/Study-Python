@@ -63,11 +63,12 @@ moz-todo-react
     └── serviceWorker.js
 ```
 
-- `src`: 애플리케이션 소스 코드 있는곳. 리액트 개발 메인폴더
+- `node_modules`: 사용하는 라이브러리 보관 폴더
 - `Public`: 앱 개발하는동안 브라우저가 읽을 파일 보유. 가장 중요한 것은 `index.html`
   -  html 파일에 코드 주입 -> 브라우저 코드 실행 가능하도록 해줌.
-  - create-react-app function에 중요한 마크업 존재 -> 함부러 편집 X 
-- `package.json`: Node.js/npm가 프로젝트를 조직하기 위해 사용하는, 프로젝트에 관련한 정보를 포함
+  -  create-react-app function에 중요한 마크업 존재 -> 함부러 편집 X 
+- `src`: 애플리케이션 소스 코드 있는곳. 리액트 개발 메인폴더
+- `package.json`: 설치한 라이브러리 기록 목록. Node.js/npm가 프로젝트를 조직하기 위해 사용하는, 프로젝트에 관련한 정보를 포함
 
 
 
@@ -76,6 +77,8 @@ moz-todo-react
 `Public`
 
 가상 DOM이 들어갈 빈 html 존재 
+
+static  파일들 보관함. (사진같은)
 
 	- `favicon.ico` 페이지 아이콘 이미지 파일 
 	- `index.html` 가상 DOM이 들어갈 빈 html 
@@ -112,3 +115,18 @@ moz-todo-react
 
 - Component rendering 할 때 새로운 데이터 생성시 사용 사능 
 - 기존 데이터 참고 -> 새로운 데이터 생성시 사용 가능 
+
+
+
+
+
+![스크린샷 2022-06-26 22.31.36](/Users/hyunjinkim/Library/Application Support/typora-user-images/스크린샷 2022-06-26 22.31.36.png)
+
+```
+# npx create-react-app 프로젝트명
+# npx : 라이브러리 설치 도와주는 명령어
+# create-react-app : 리액트 셋팅 완성된 boilerplate 만들기 쉽게 도와주는 라이브러리
+
+npx create-react-app blog
+```
+
