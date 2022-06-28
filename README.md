@@ -7,9 +7,9 @@ Today I Learned
 
 
 ##  📓 Python 
-
+〰️ 
 ## 📓 Numpy
-
+〰️ 
 ## 📓 Library
 ​	〰️ Pandas   
 ​	〰️ Matplotlib   
