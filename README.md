@@ -8,6 +8,7 @@ Today I Learned
 
 ##  📓 Python 
 〰️ 
+〰️
 ## 📓 Numpy
 〰️ 
 ## 📓 Library
