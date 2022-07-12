@@ -23,7 +23,7 @@ img = cv2.imread("lenna.png")
 
 ```python
 ### convert color
-# dst = cv2.cvtcolor(src, code, dstCn)
+dst = cv2.cvtcolor(src, code, dstCn)
 
 # dst : 입력 이미지와 동일한 크기의 출력 이미지
 # src : 입력 이미지
@@ -33,7 +33,6 @@ img = cv2.imread("lenna.png")
 # BGR -> GRAY
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ```
-
 
 
 
@@ -68,6 +67,90 @@ ret, dst = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 
 
 
+### 윤곽선 (Contours)
+
+```py
+### 윤곽선 검출
+images, contours, hierachy = cv2.findContours(image, mode, method)
+
+# image: 흑백 or 이진화 된 이미지
+# mode: 컨투어 찾는 방법 
+#		- cv2.RETR_EXTERNAL: 가장 바깥 라인만
+#		- cv2.RETR_LIST: 모든 라인 찾음. but 상하구조(hierachy) 관계 구성X
+#		- cv2.RETR_CCOMP: 모든 라인 찾음. 상하구조(hierachy) 2단계 구성
+#		- cv2.RETR_TREE: 모든 라인 찾음. 모든 상하구조 구성 
+# method
+#		- cv2.CHAIN_APPROX_NONE: 모든 컨투어 포인트 반환 
+#		- cv2.CHAIN_APPROX_SIMPLE: 라인 그릴 수 있는 포인트만 반환 
+#		- cv2.CHAIN_APPROX_TC89_L1: 연결 근사 알고리즘(L1 버전) 적용 -> 컨투어 포인트 줄임
+#		- cv2.CHAIN_APPROX_TC89_KCOS: 연결 근사 알고리즘(KCOS 버전) 적용 -> 컨투어 포인트 줄임
+
+
+### 윤곽선 그리기
+# cv2.drawContours(이미지, [윤곽선], 윤곽선 인덱스, (B, G, R), 두께, 선형 타입)
+cv2.drawContours(src, [contours[0]], 0, (0, 0, 255), 2)
+```
+
+`contours` ->  3차원의 리스트
+
+
+
+첫번째 차원 -> 윤곽선 인덱스
+
+두번째 차원 -> 외곽선의 x,y좌표
+
+```py
+contours[0][0] =  [[116  11]]
+contours[0][1] =  [[115  12]]
+
+contours[0][0][0][0] =  116 # 첫번째 윤곽선 좌표의 x값
+contours[0][0][0][1] =  11  # 첫번째 윤곽선 좌표의 y값
+contours[0][1][0][0] =  115 # 두번째 윤곽선 좌표의 x값
+contours[0][1][0][1] =  12  # 두번째 윤곽선 좌표의 y값
+```
+
+
+
+#### 윤곽선 최대 최소값
+
+```py
+src = cv2.imread("contours.jpg", cv2.IMREAD_COLOR)
+
+gray = cv2.cvtColor(src, cv2.COLOR_RGB2GRAY)
+ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+binary = cv2.bitwise_not(binary)
+
+contours, hierachy = cv2.findContours(binary, cv2.RETR_TREE , cv2.CHAIN_APPROX_NONE)
+
+contours_min = np.argmin(contours[0], axis = 0) # [[119   0]]
+contours_max = np.argmax(contours[0], axis = 0) # [[488 245]]
+
+
+print("x-Min =", contours[0][contours_min[0][0]][0][0])
+print("y-Min =", contours[0][contours_min[0][1]][0][1])
+print("x-Max =", contours[0][contours_max[0][0]][0][0])
+print("y-Max =", contours[0][contours_max[0][1]][0][1])
+
+x-Min = 30
+y-Min = 11
+x-Max = 326
+y-Max = 189
+```
+
+
+
+
+
+
+
+
+
+```
+
+```
+
+
+
 
 
 ### 이미지 출력
@@ -88,3 +171,10 @@ cv2.waitKey(0)
 
 
 
+
+
+----
+
+[참조]
+
+ -https://jung-max.github.io/2020/04/08/opencv%20%EC%9C%A4%EA%B3%BD%EC%84%A0(Contours)%EA%B0%92%EC%9D%98%20%EC%9D%98%EB%AF%B8(%EB%82%B4%EC%9A%A9)%20%EC%B5%9C%EB%8C%80%EA%B0%92%20%EC%B5%9C%EC%86%8C%EA%B0%92%20%EA%B5%AC%ED%95%98%EA%B8%B0/
