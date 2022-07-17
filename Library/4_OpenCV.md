@@ -139,6 +139,29 @@ y-Max = 189
 
 
 
+### 이미지 회전
+
+1. 좌푯값을 회전시키는 회전 행렬 - 원점을 중심으로 좌푯값을 회전시켜 매핑
+2.  좌표 축을 회전시키는 회전 행렬 - 원점을 중심으로 행렬 자체를 회전시켜 새로운 행렬의 값을 구성
+
+```py
+src = cv2.imread("Image/ara.jpg", cv2.IMREAD_COLOR) # 이미지 읽어오기
+
+height, width, channel = src.shape
+
+# 2×3 회전 행렬 생성 함수 (matrix = cv2.getRotationMatrix2D(center, angle, scale))
+# 중심점(center): 튜플(Tuple) 형태로 사용하며 회전의 기준점을 설정
+# 각도(angle): 중심점을 기준으로 회전할 각도를 설정
+# 비율(scale): 이미지의 확대 및 축소 비율을 설정
+matrix = cv2.getRotationMatrix2D((width/2, height/2), 90, 1)  
+
+# 아핀 변환 함수(cv2.warpAffine) (dst = cv2.warpAffine(src, M, dsize))
+# 아핀 맵 행렬(M): 회전 행렬 생성 함수에서 반환된 매핑 변환 행렬을 사용
+# 출력 이미지 크기(dsize): 튜플(Tuple) 형태로 사용하며 출력 이미지의 너비와 높이를 의미
+dst = cv2.warpAffine(src, matrix, (width, height))
+
+```
+
 
 
 
@@ -178,3 +201,5 @@ cv2.waitKey(0)
 [참조]
 
  -https://jung-max.github.io/2020/04/08/opencv%20%EC%9C%A4%EA%B3%BD%EC%84%A0(Contours)%EA%B0%92%EC%9D%98%20%EC%9D%98%EB%AF%B8(%EB%82%B4%EC%9A%A9)%20%EC%B5%9C%EB%8C%80%EA%B0%92%20%EC%B5%9C%EC%86%8C%EA%B0%92%20%EA%B5%AC%ED%95%98%EA%B8%B0/
+
+- https://076923.github.io/posts/Python-opencv-6/
