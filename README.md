@@ -6,29 +6,29 @@ Today I Learned
 
 
 
-##  📓 Python 
+###  📓 Python 
 〰️ 
 〰️
-## 📓 Numpy
-〰️ 
-## 📓 Library
+### 📓 Numpy
+### 📓 OpenCV
+### 📓 Library
 ​	〰️ Pandas   
 ​	〰️ Matplotlib   
 ​	〰️ 
 
-## 📓 Machine Learning	
+### 🤖 Machine Learning	
 
-## 📓 Deep Learning
+### 🤖Deep Learning
 
 
-## 📓 Algorithm
+### 📓 Algorithm
 〰️ 자료구조    
 〰️ 알고리즘
 
-## 📓 React 
+### 📓 React 
 
-## 📓 HTML 
-## 📓 etc.
+### 📓 HTML 
+### 📓 etc.
  〰️   Markdown
 
 
