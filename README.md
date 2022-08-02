@@ -6,18 +6,16 @@ Today I Learned
 
 
 
-###  📓 Python 
-〰️ 
-〰️
+### 🔵 Python 
+
 ### 📓 Numpy
 ### 📓 OpenCV
 ### 📓 Library
 ​	〰️ Pandas   
 ​	〰️ Matplotlib   
-​	〰️ 
+​	〰️ Web Crawling
 
 ### 🤖 Machine Learning	
-
 ### 🤖Deep Learning
 
 
@@ -26,7 +24,7 @@ Today I Learned
 〰️ 알고리즘
 
 ### 📓 React 
-
+### 📓 SQL
 ### 📓 HTML 
 ### 📓 etc.
  〰️   Markdown
