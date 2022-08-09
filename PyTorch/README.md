@@ -1,3 +1,10 @@
+#### 01_01_PyTorch_Tensor_Allocation
+
+1. 1D with PyTorch
+2. 2D with PyTorch
+3. 브로드캐스팅(Broadcasting)
+
+
 #### 01_02_PyTorch 자주 사용하는 기능
 
 1. 곱셈 (Multiplication)
@@ -9,3 +16,9 @@
 
 1. 뷰 (View)
 2. 
+
+
+
+-----
+[참조]
+- [위키독스, PyTorch로 시작하는 딥 러닝 입문](https://wikidocs.net/book/2788)
