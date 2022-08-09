@@ -15,7 +15,10 @@
 #### 01_03_Tensor Manipulation
 
 1. 뷰 (View)
-2. 
+2. 스퀴즈 (Squeeze)
+3. 언스퀴즈 (Unsqueeze)
+
+
 
 
 
