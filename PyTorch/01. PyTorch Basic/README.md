@@ -20,7 +20,7 @@
 2. 스퀴즈 (Squeeze)
 3. 언스퀴즈 (Unsqueeze)
 
-#### 03) Tensor varous transform 
+#### 04) Tensor varous transform 
 
 1. 타입 캐스팅 (Type Casting)
 2. 연결하기 (Concatenate)
@@ -28,6 +28,10 @@
 4. 채우기
 5. 덮어쓰기 연산 (In-place Operation)
 
+#### 05) Python Class
+
+1. 함수(function)
+2. 클래스(Class)
 
 
 
