@@ -1,10 +1,14 @@
-### 1. PyTorch Basic
+### 2. Linear Regression
 
-#### 01) PyTorch Tensor Allocation
+#### 01) Linear Regression
 
-1. 1D with PyTorch
-2. 2D with PyTorch
-3. 브로드캐스팅(Broadcasting)
+1. 변수 선언
+2. 가중치(`W`)와 편향(`b`) 초기화
+3. 가설(`H`) 세우기
+4. 비용 함수(cost function) 선언
+5. 경사 하강법 구현
+6. `optimizer.zero_grad()`의 필요 이유
+7. `torch.manual_seed()` 사용 이유
 
 
 #### 02) PyTorch 자주 사용하는 기능
