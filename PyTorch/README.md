@@ -12,4 +12,5 @@
 
 ## 2. Linear Regression
 
+1) PyTorch Linear Regression
 
