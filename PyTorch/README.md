@@ -13,4 +13,5 @@
 ## 2. Linear Regression
 
 1) PyTorch Linear Regression
+2) Multivariable Linear Regression
 
