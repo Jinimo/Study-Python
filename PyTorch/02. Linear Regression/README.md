@@ -11,12 +11,9 @@
 7. `torch.manual_seed()` 사용 이유
 
 
-#### 02) PyTorch 자주 사용하는 기능
+#### 02) Multivariable Linear Regression
 
-1. 곱셈 (Multiplication)
-2. 평균 (Mean)
-3. 덧셈 (Sum)
-4. 최대 (Max) & 아그맥스 (ArgMax)
+1. 벡터와 행렬 연산으로 바꾸기 (Dot Product)
 
 #### 03) Tensor Manipulation
 
