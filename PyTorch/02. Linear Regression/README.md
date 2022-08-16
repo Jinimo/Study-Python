@@ -15,11 +15,9 @@
 
 1. 벡터와 행렬 연산으로 바꾸기 (Dot Product)
 
-#### 03) Tensor Manipulation
+#### 03) nn_Module로 Linear Regression 구현 
 
-1. 뷰 (View)
-2. 스퀴즈 (Squeeze)
-3. 언스퀴즈 (Unsqueeze)
+1. 단순 선형 회귀 구현
 
 #### 04) Tensor varous transform 
 
