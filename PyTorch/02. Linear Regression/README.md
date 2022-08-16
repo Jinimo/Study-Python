@@ -17,7 +17,7 @@
 
 #### 03) nn_Module로 Linear Regression 구현 
 
-1. 단순 선형 회귀 구현
+1. 단순 선형 회귀(`nn.Linear(input_dim, output_dim)`) 
 
 #### 04) Tensor varous transform 
 
