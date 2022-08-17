@@ -17,9 +17,13 @@
 
 #### 03) nn_Module로 Linear Regression 구현 
 
-1. 단순 선형 회귀(`nn.Linear(input_dim, output_dim)`) 
+1. 단순 선형 회귀(`nn.Linear(input_dim, output_dim)`)
+- 예시) `input_dim = 1`, `output_dim = 1`
 
-#### 04) Tensor varous transform 
+#### 04) nn_Module로 Multivariable Linear Regression 구현 
+
+1. 다중 선형 회귀(`nn.Linear(input_dim, output_dim)`
+- 예시) `input_dim = 3`, `output_dim = 1`
 
 1. 타입 캐스팅 (Type Casting)
 2. 연결하기 (Concatenate)
