@@ -31,10 +31,11 @@
 4. 채우기
 5. 덮어쓰기 연산 (In-place Operation)
 
-#### 05) Python Class
+#### 05) Class로 PyTorch 구현하기
 
-1. 함수(function)
-2. 클래스(Class)
+1. model - Class로 구현하기
+2. 단순 선형 회귀(Linear Regression) - Class로 구현하기
+3. 다중 선형 회귀 (Multivariable Linear Regression) - Class로 구현하기
 
 
 
