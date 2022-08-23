@@ -37,6 +37,12 @@
 2. 단순 선형 회귀(Linear Regression) - Class로 구현하기
 3. 다중 선형 회귀 (Multivariable Linear Regression) - Class로 구현하기
 
+#### 06) Mini Batch and Data Load
+
+1. 미니 배치와 배치 크기 (Mini Batch and Batch Size)
+2. 이터레이션 (Iteration)
+3. 데이터 로드 (Data Load)
+ 
 
 
 
