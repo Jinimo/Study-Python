@@ -42,6 +42,11 @@
 1. 미니 배치와 배치 크기 (Mini Batch and Batch Size)
 2. 이터레이션 (Iteration)
 3. 데이터 로드 (Data Load)
+
+#### 07) Custom Dataset
+
+1. 커스텀 데이터셋(Custom Dataset)
+2. 커스텀 데이터셋으로 선형 회귀 구현
  
 
 
